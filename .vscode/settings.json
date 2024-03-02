@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/.mypy": true,
+        "**/.mypy_cache": true,
+        "**/__pycache__": true,
+    }
+}
