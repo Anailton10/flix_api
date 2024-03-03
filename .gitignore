@@ -1,2 +1,5 @@
 venv
 db.sqlite3
+mypy.ini
+.pylintrc
+__pycache__
