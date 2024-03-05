@@ -7,5 +7,5 @@ urlpatterns = [
          name='movies-list-create'),
 
     path('movies/<int:pk>/', views.MovieRetrieveUpdateDestroyView.as_view(),
-         name='movies-detail'),
+         name='movies-detail-view'),
 ]
