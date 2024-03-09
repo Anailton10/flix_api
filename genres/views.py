@@ -1,11 +1,13 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+
+from genres.models import Genre
+from genres.permissions import GenrePersmissionsClass
 from genres.serializers import GenresSerializers
-from .models import Genre
 
 
 class GenreCreateListView(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GenrePersmissionsClass,)
     queryset = Genre.objects.all().order_by('-id')
     serializer_class = GenresSerializers
 
