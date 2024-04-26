@@ -4,20 +4,28 @@ from rest_framework.permissions import IsAuthenticated
 
 from app.permissions import GlobalDefaultPermission
 from movies.models import Movie
-from movies.serializer import MovieSerilizers
+from movies.serializer import MovieListDetailSerializer, MovieSerilizers
 from reviews.models import Review
 
 
 class MovieListCreateView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Movie.objects.all()
-    serializer_class = MovieSerilizers
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return MovieListDetailSerializer
+        return MovieSerilizers
 
 
 class MovieRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Movie.objects.all()
-    serializer_class = MovieSerilizers
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return MovieListDetailSerializer
+        return MovieSerilizers
 
 
 class MovieStatsView(views.APIView):
@@ -41,7 +49,8 @@ class MovieStatsView(views.APIView):
                 'total_movies': total_movies,
                 'movies_by_genre': movies_by_genre,
                 'total_reviews': total_reviews,
-                'average_stars': round(average_stars, 1) if average_stars else 0,
+                'average_stars': round(average_stars, 1)
+                if average_stars else 0,
             },
 
             status=status.HTTP_200_OK,
