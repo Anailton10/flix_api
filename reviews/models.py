@@ -12,7 +12,7 @@ class Review(models.Model):
         validators=[
             MinValueValidator(0, 'Avaliação não pode ser inferior a 0 estrelas'),
             MaxValueValidator(5, 'Avaliação não pode ser superiors a 5 estrelas')
-    ])
+        ])
 
     comment = models.TextField(blank=True, null=True)
 
